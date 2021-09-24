@@ -25,15 +25,15 @@ jQuery(document).on("click", "#share-whatsapp-icon", function() {
     var quotes_text = jQuery(this).parents("blockquote").find('p').clone().find('br').prepend('\r\n').end().text();
     // var href = "https://api.whatsapp.com/?text="+quotes_text;
     var location = window.location.href;
-    var href = "https://wa.me/?text="+quotes_text+"\r\n\r\nvia-"+location;
-    window.open(href, "_blank");
+    var href = "https://wa.me/?text="+quotes_text+"\r\n\r\n - via-"+location;
+    window.open(encodeURI(href), "_blank");
 });
 jQuery(document).on("click", "#share-telegram-icon", function() {
     var quotes_text = jQuery(this).parents("blockquote").find('p').clone().find('br').prepend('\r\n').end().text();
     var location = window.location.href;
-    quotes_text = quotes_text+"\r\n\r\nvia-"+location;
+    quotes_text = quotes_text+"\r\n\r\n- via-"+location;
     var href = "tg://msg?text="+quotes_text;
-    window.open(href, "_blank");
+    window.open(encodeURI(href), "_blank");
 });
 
 new ClipboardJS('.copyit');  
