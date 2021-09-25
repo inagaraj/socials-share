@@ -17,13 +17,61 @@
                             <a class="copyit" data-clipboard-text="If you focus on problem you will have more problem but if you focus on possibilities you will have more opportunity.">Copy<span class="copied">Copied</span></a>
                         </div></blockquote>
                         <figure class="wp-block-image">
-                            <img src="https://funkylife.in/wp-content/uploads/2021/02/love-shayari-hindi-funky-life-4.jpg" alt="" class="wp-image-9">
+                            <img src="./love-shayari-hindi-funky-life-4.jpg" alt="" class="wp-image-9">
                             <figcaption>Naga</figcaption>
                             
-                        <div class="download-link">
-                            <a id="download_nopurchased" class="click_download icon-download"  data-href="https://funkylife.in/wp-content/uploads/2021/02/love-shayari-hindi-funky-life-4.jpg" download="https://funkylife.in/wp-content/uploads/2021/02/love-shayari-hindi-funky-life-4.jpg" data-url="https://funkylife.in/wp-content/uploads/2021/02/love-shayari-hindi-funky-life-4.jpg"><i class="fas fa-download"></i> Download</a>
-                        </div></figure>
+                       </figure>
                         <a href="tg://msg?text=HI">Link</a>
+                        <script>
+                            jQuery(".wp-block-image").each(function() {
+
+var imageurl = jQuery(this).find("img").attr("src");
+var download_html =`<div class="download-link">
+                        <a href="javascript:void(0);" id="download_nopurchased" class="click_download icon-download" data-href="${imageurl}"  download="${imageurl}" data-url="${imageurl}"><i class="fas fa-download"></i> Download</a>
+                    </div>`;
+jQuery(this).append(download_html);
+});
+jQuery(".click_download").click(function() {
+    alert("Clcik");
+    var file = jQuery(this).data("url");
+    var file_name = getFileName(file);
+    forceDownload(file,file_name);
+    //window.location.href="'.$plugin_url.'?file=file;
+    // setTimeout(function(){ location.reload(); }, 2000);
+    // var formData = new FormData();
+    // formData.append("file", file);
+    // jQuery.ajax({
+    //     url: "./wp-content/plugins/custom-socials-share/download.php",
+    //     contentType: false,
+    //     processData: false,
+    //     data: formData,
+    //     type: "POST",
+    //     success: function (data) {
+    //         console.log(data);
+        
+    //     }
+    // });
+});
+function getFileName(str) {
+    return str.substring(str.lastIndexOf('/') + 1)
+}
+function forceDownload(url, fileName){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = "blob";
+    xhr.onload = function(){
+        var urlCreator = window.URL || window.webkitURL;
+        var imageUrl = urlCreator.createObjectURL(this.response);
+        var tag = document.createElement('a');
+        tag.href = imageUrl;
+        tag.download = fileName;
+        document.body.appendChild(tag);
+        tag.click();
+        document.body.removeChild(tag);
+    }
+    xhr.send();
+}
+                            </script>
                         <style>
                             .wp-block-image {
     margin-top: 20px;
